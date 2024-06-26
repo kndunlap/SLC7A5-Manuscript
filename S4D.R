@@ -30,13 +30,21 @@ scatter <- function(gene1, gene2, code, alpha) {
     annotate("text", x = Inf, y = -Inf, label = label, hjust = 1, vjust = -0.5, size = 4.5, color = "black", parse = FALSE) +
     geom_smooth(method = "lm") +
     theme_classic() +
-    theme(axis.text.x = element_text(size = 18)) +
-    theme(axis.text.y = element_text(size = 18)) +
-    theme(axis.title.x = element_text(size = 20)) +
-    theme(axis.title.y = element_text(size = 20)) +
+    theme(
+      axis.text.x = element_text(size = 18),
+      axis.text.y = element_text(size = 18),
+      axis.title.x = element_text(size = 20, face = "italic"),
+      axis.title.y = element_text(size = 20, face = "italic")
+    ) +
+    labs(
+      x = expression(italic("SLC7A5") * " mRNA level"),
+      y = expression(italic("ASS1") * " mRNA level")
+    ) +
     scale_x_continuous(breaks = seq(1, 16, 4))
 }
 
 # Run
 
 scatter(SLC7A5, ASS1, BRCA, 0.4)
+
+ggsave("LumB_i.jpg", dpi = 300, width = 6, height = 4.5, units = "in")
